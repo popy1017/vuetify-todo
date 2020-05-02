@@ -1,28 +1,40 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <p>Todoリストもどき</p>
+    <hr>
+    <Todo v-for="todo in todos" :key="todo.id" :todo="todo"></Todo>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Todo from "./components/Todo";
+import { v4 as uuidv4 } from 'uuid';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    Todo
+  },
+  data() {
+    return {
+      todos: [
+        {id: uuidv4(), title: "Todoリストを作る", dueDate: Date(), note: "CSSの知識が足りない・・・。"},
+        {id: uuidv4(), title: "デザインフレームワークを使っておしゃれにする", dueDate: Date(), note: "Vuetifyを使ってみたい。"},
+        {id: uuidv4(), title: "ログイン機能を追加する", dueDate: Date(), note: "Udemyのボーナス講座を受講"},
+        {id: uuidv4(), title: "次にうける講座を決める", dueDate: Date(), note: "Vueを極めるか、他の勉強をするか・・・"},    
+      ],
+    }
   }
 }
 </script>
 
-<style>
+<style scoped>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  width: 70%;
+  margin: auto;
+}
+#header {
+  width: 100%;
+  margin: auto;
 }
 </style>
