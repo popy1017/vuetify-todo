@@ -2,7 +2,7 @@
   <div id="app">
     <p>Todoリストもどき</p>
     <hr>
-    <Todo v-for="todo in todos" :key="todo.id" :todo="todo"></Todo>
+    <Todo v-for="todo in todos" :key="todo.id" :todo="todo" :show-relative="showRelative"></Todo>
   </div>
 </template>
 
@@ -17,6 +17,7 @@ export default {
   },
   data() {
     return {
+      showRelative: true,
       todos: [
         {id: uuidv4(), title: "Todoリストを作る", dueDate: Date(), note: "CSSの知識が足りない・・・。"},
         {id: uuidv4(), title: "デザインフレームワークを使っておしゃれにする", dueDate: Date(), note: "Vuetifyを使ってみたい。"},
