@@ -10,6 +10,6 @@ export default new Router({
   routes: [
     { path: "/", component: TodoList },
     { path: "/todo", component: CreateTodo },
-    { path: "/todo:uuid", component: EditTodo },
+    { path: "/todo/:uuid", component: EditTodo, props: true },
   ],
 });
