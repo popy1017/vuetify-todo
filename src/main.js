@@ -1,10 +1,13 @@
 import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
+
 import "dayjs/locale/ja";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import localizedFormat from "dayjs/plugin/localizedFormat";
+
+import todos from "./assets/mock-todo";
 
 dayjs.extend(relativeTime);
 dayjs.extend(localizedFormat);
@@ -19,4 +22,13 @@ Vue.filter("llll", (date) => dayjs(date).format("llll"));
 new Vue({
   render: (h) => h(App),
   router,
+  data: {
+    message: "hello",
+    todos,
+  },
+  methods: {
+    addTodo(todo) {
+      this.todos.push(todo);
+    },
+  },
 }).$mount("#app");
