@@ -3,7 +3,7 @@
     <div class="check-area">
       <input class="checkbox" type="checkbox" />
     </div>
-    <div class="title-area">{{ todo.title }}</div>
+    <div class="title-area" @click="toEditTodo(todo.uuid)">{{ todo.title }}</div>
     <div class="due-date-area">
       <template v-if="showRelative">{{ todo.dueDate | fromNow }}</template>
       <template v-else>{{ todo.dueDate | llll }}</template>
@@ -14,7 +14,12 @@
 
 <script>
 export default {
-  props: ["todo", "showRelative"]
+  props: ["todo", "showRelative"],
+  methods: {
+    toEditTodo() {
+      this.$router.push(`/todo/${this.todo.id}`);
+    }
+  }
 };
 </script>
 
