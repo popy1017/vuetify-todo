@@ -1,47 +1,55 @@
 <template>
-  <div class="item-card border">
-    <input class="checkbox border" type="checkbox" />
-    <div class="todo_detail border">
-      <h3>{{ todo.title }}</h3>
-      <div class="dueDate border">
-        <div v-if="showRelative">{{ todo.dueDate | fromNow }}</div>
-        <div v-else>{{ todo.dueDate | llll }}</div>
-      </div>
-      <div class="note">{{ todo.note }}</div>
+  <div class="item-card">
+    <div class="check-area">
+      <input class="checkbox" type="checkbox" />
     </div>
+    <div class="title-area">{{ todo.title }}</div>
+    <div class="due-date-area">
+      <template v-if="showRelative">{{ todo.dueDate | fromNow }}</template>
+      <template v-else>{{ todo.dueDate | llll }}</template>
+    </div>
+    <div class="note-area">{{ todo.note }}</div>
   </div>
 </template>
 
 <script>
 export default {
-  props: ["todo", "showRelative"],
+  props: ["todo", "showRelative"]
 };
 </script>
 
 <style scoped>
-/* .border {
-  border: solid 1px;
-} */
 .item-card {
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
   border-radius: 10px;
+  margin: 1rem auto;
+  display: grid;
+  grid-template-rows: 40% 20% 40%;
+  grid-template-columns: 50px 1fr;
 }
-.checkbox {
-  display: inline-block;
-  vertical-align: middle;
+.check-area {
+  grid-row: 1 / 4;
+  grid-column: 1 / 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.title-area {
+  grid-row: 1 / 2;
+  grid-column: 2 / 3;
+  margin: 10px;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+.due-date-area {
+  grid-row: 2 / 3;
+  grid-column: 2 / 3;
+  text-align: right;
   margin: 0 1rem;
 }
-.todo_detail {
-  width: 90%;
-  display: inline-block;
-  vertical-align: middle;
-  padding-left: 1rem;
-}
-.dueDate {
-  text-align: right;
-  height: auto;
-}
-.note {
-  margin-bottom: 1rem;
+.note-area {
+  grid-row: 3 / 4;
+  grid-column: 2 / 3;
+  margin: 10px;
 }
 </style>
