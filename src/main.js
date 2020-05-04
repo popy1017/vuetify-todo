@@ -8,11 +8,10 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import localizedFormat from "dayjs/plugin/localizedFormat";
 
 import { v4 as uuidv4 } from "uuid";
-import todos from "./assets/mock-todo";
 
 import localStorage from "vue-ls";
 const options = {
-  namespace: "vuejs__", // key prefix
+  namespace: "vue_todo_ls_", // key prefix
   name: "ls", // name variable Vue.[ls] or this.[$ls],
   storage: "local", // storage name session, local, memory
 };
@@ -33,19 +32,26 @@ new Vue({
   render: (h) => h(App),
   router,
   data: {
-    message: "hello",
-    todos,
+    todos: [],
   },
   methods: {
+    getTodos() {
+      this.todos = this.$ls.get("todos");
+    },
+    setTodos() {
+      this.$ls.set("todos", this.todos);
+    },
     addTodo(todo) {
       todo.id = uuidv4();
       this.todos.push(todo);
+      this.setTodos();
     },
     updateTodo(todo) {
       const id = this.todos.findIndex((item) => item.id == todo.id);
 
       if (id >= 0) {
         this.todos[id] = Object.assign(this.todos[id], todo);
+        this.setTodos();
       }
     },
     removeTodo(id) {
@@ -53,7 +59,11 @@ new Vue({
 
       if (index >= 0) {
         this.todos.splice(index, 1);
+        this.setTodos();
       }
     },
+  },
+  mounted() {
+    this.$root.getTodos();
   },
 }).$mount("#app");
