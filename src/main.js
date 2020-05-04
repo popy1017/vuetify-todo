@@ -39,5 +39,12 @@ new Vue({
         this.todos[id] = todo;
       }
     },
+    removeTodo(id) {
+      const index = this.todos.findIndex((item) => item.id == id);
+
+      if (index >= 0) {
+        this.todos.splice(index, 1);
+      }
+    },
   },
 }).$mount("#app");

@@ -5,8 +5,8 @@
     </div>
     <div class="title-area">{{ todo.title }}</div>
     <div class="edit-delete-area">
-      <button @click="toEditTodo(todo.uuid)">編集</button>
-      <button>削除</button>
+      <button @click="toEditTodo">編集</button>
+      <button @click="remove">削除</button>
     </div>
     <div class="due-date-area">
       <template v-if="showRelative">{{ todo.dueDate | fromNow }}</template>
@@ -27,6 +27,12 @@ export default {
           todo: this.todo
         }
       });
+    },
+    remove() {
+      const result = confirm("削除してもよろしいですか？");
+      if (result) {
+        this.$root.removeTodo(this.todo.id);
+      }
     }
   }
 };
