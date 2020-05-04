@@ -7,8 +7,17 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import localizedFormat from "dayjs/plugin/localizedFormat";
 
-import todos from "./assets/mock-todo";
 import { v4 as uuidv4 } from "uuid";
+import todos from "./assets/mock-todo";
+
+import localStorage from "vue-ls";
+const options = {
+  namespace: "vuejs__", // key prefix
+  name: "ls", // name variable Vue.[ls] or this.[$ls],
+  storage: "local", // storage name session, local, memory
+};
+
+Vue.use(localStorage, options);
 
 dayjs.extend(relativeTime);
 dayjs.extend(localizedFormat);
