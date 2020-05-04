@@ -8,6 +8,7 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import localizedFormat from "dayjs/plugin/localizedFormat";
 
 import todos from "./assets/mock-todo";
+import { v4 as uuidv4 } from "uuid";
 
 dayjs.extend(relativeTime);
 dayjs.extend(localizedFormat);
@@ -28,7 +29,15 @@ new Vue({
   },
   methods: {
     addTodo(todo) {
+      todo.id = uuidv4();
       this.todos.push(todo);
+    },
+    updateTodo(todo) {
+      const id = this.todos.findIndex((item) => item.id == todo.id);
+
+      if (id >= 0) {
+        this.todos[id] = todo;
+      }
     },
   },
 }).$mount("#app");

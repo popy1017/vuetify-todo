@@ -16,7 +16,6 @@ export default new Router({
       path: "/edit",
       component: EditTodo,
       props(route) {
-        console.log(route.params);
         return {
           ...route.params,
         };
