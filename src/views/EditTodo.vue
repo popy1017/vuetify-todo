@@ -16,7 +16,7 @@
       <br />
       <textarea name id="note" cols="30" rows="10" v-model="note"></textarea>
     </p>
-    <button @click="update">更新</button>
+    <button class="button" @click="update">更新</button>
   </div>
 </template>
 
@@ -61,6 +61,11 @@ export default {
 #title,
 #dueDate,
 #note {
-  width: 90%;
+  width: 100%;
+}
+.button {
+  width: 100%;
+  font-size: 1.2rem;
+  margin: auto;
 }
 </style>
