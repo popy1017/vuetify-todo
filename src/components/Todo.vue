@@ -3,7 +3,11 @@
     <div class="check-area">
       <input class="checkbox" type="checkbox" />
     </div>
-    <div class="title-area" @click="toEditTodo(todo.uuid)">{{ todo.title }}</div>
+    <div class="title-area">{{ todo.title }}</div>
+    <div class="edit-delete-area">
+      <button @click="toEditTodo(todo.uuid)">編集</button>
+      <button>削除</button>
+    </div>
     <div class="due-date-area">
       <template v-if="showRelative">{{ todo.dueDate | fromNow }}</template>
       <template v-else>{{ todo.dueDate | llll }}</template>
@@ -35,7 +39,7 @@ export default {
   margin: 1rem auto;
   display: grid;
   grid-template-rows: 40% 20% 40%;
-  grid-template-columns: 50px 1fr;
+  grid-template-columns: 50px 1fr 50px;
 }
 .check-area {
   grid-row: 1 / 4;
@@ -50,6 +54,11 @@ export default {
   margin: 10px;
   font-size: 1.5rem;
   font-weight: bold;
+}
+.edit-delete-area {
+  grid-row: 1 / 3;
+  grid-column: 3 / 4;
+  margin: auto;
 }
 .due-date-area {
   grid-row: 2 / 3;
