@@ -1,12 +1,13 @@
 <template>
   <div>
     <h1>Todo編集</h1>
-    <p>{{uuid}}</p>
+    <p>{{todo.id}}</p>
+    <p>{{todo.title}}</p>
   </div>
 </template>
 
 <script>
 export default {
-  props: ["uuid"]
+  props: ["todo"]
 };
 </script>

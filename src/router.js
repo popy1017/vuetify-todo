@@ -7,9 +7,20 @@ import EditTodo from "./views/EditTodo";
 Vue.use(Router);
 
 export default new Router({
+  mode: "history",
   routes: [
     { path: "/", component: TodoList },
-    { path: "/todo", component: CreateTodo },
-    { path: "/todo/:uuid", component: EditTodo, props: true },
+    { path: "/create", component: CreateTodo },
+    {
+      name: "edit",
+      path: "/edit",
+      component: EditTodo,
+      props(route) {
+        console.log(route.params);
+        return {
+          ...route.params,
+        };
+      },
+    },
   ],
 });

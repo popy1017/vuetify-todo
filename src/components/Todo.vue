@@ -17,7 +17,12 @@ export default {
   props: ["todo", "showRelative"],
   methods: {
     toEditTodo() {
-      this.$router.push(`/todo/${this.todo.id}`);
+      this.$router.push({
+        name: "edit",
+        params: {
+          todo: this.todo
+        }
+      });
     }
   }
 };

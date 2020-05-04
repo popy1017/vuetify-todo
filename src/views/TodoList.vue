@@ -27,7 +27,7 @@ export default {
   },
   methods: {
     toCreateTodo() {
-      this.$router.push("/todo");
+      this.$router.push("/create");
     }
   }
 };
