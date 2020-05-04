@@ -36,7 +36,7 @@ new Vue({
       const id = this.todos.findIndex((item) => item.id == todo.id);
 
       if (id >= 0) {
-        this.todos[id] = todo;
+        this.todos[id] = Object.assign(this.todos[id], todo);
       }
     },
     removeTodo(id) {

@@ -1,7 +1,7 @@
 <template>
   <div class="item-card">
     <div class="check-area">
-      <input class="checkbox" type="checkbox" />
+      <input class="checkbox" type="checkbox" v-model="todo.done" />
     </div>
     <div class="title-area">{{ todo.title }}</div>
     <div class="edit-delete-area">

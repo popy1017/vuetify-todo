@@ -25,7 +25,8 @@ export default {
     return {
       title: "",
       dueDate: Date(),
-      note: ""
+      note: "",
+      done: false
     };
   },
   methods: {
@@ -36,7 +37,8 @@ export default {
       const todo = {
         title: this.title,
         dueDate: this.dueDate,
-        note: this.note
+        note: this.note,
+        done: false
       };
       this.$root.addTodo(todo);
       this.toTodoList();
