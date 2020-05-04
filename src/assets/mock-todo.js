@@ -17,7 +17,7 @@ export default [
   },
   {
     id: uuidv4(),
-    title: "「完了したTodoを表示する」チェックボックスで表示切り替え",
+    title: "「完了したTodoを隠す」チェックボックスで表示切り替え",
     dueDate: Date(),
     note: "完了したTodoの表示・非表示を切り替えます。",
     done: false,
