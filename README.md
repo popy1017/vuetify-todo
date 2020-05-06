@@ -1,4 +1,4 @@
-# vue-todo-localstorage
+# vuetify-todo
 
 ## Project setup
 
