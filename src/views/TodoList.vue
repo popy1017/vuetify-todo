@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid>
+  <v-container>
     <v-row justify="end">
       <v-switch
         v-model="hideDoneTodo"
