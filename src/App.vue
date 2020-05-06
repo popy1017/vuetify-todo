@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar app color="primary" dark>Todoリスト</v-app-bar>
+    <v-app-bar app color="primary" dark class="headline">Todoリスト</v-app-bar>
     <v-content>
       <keep-alive include="TodoList">
         <router-view></router-view>
