@@ -10,6 +10,7 @@ import localizedFormat from "dayjs/plugin/localizedFormat";
 import { v4 as uuidv4 } from "uuid";
 
 import localStorage from "vue-ls";
+import vuetify from "./plugins/vuetify";
 const options = {
   namespace: "vue_todo_ls_", // key prefix
   name: "ls", // name variable Vue.[ls] or this.[$ls],
@@ -31,12 +32,13 @@ Vue.filter("llll", (date) => dayjs(date).format("llll"));
 new Vue({
   render: (h) => h(App),
   router,
+  vuetify,
   data: {
     todos: [],
   },
   methods: {
     getTodos() {
-      this.todos = this.$ls.get("todos");
+      this.todos = this.$ls.get("todos") || [];
     },
     setTodos() {
       this.$ls.set("todos", this.todos);

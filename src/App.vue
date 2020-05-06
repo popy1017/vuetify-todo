@@ -1,16 +1,16 @@
 <template>
-  <div id="app">
+  <v-app id="app">
     <p>Todoリストもどき</p>
     <hr />
     <keep-alive include="TodoList">
       <router-view></router-view>
     </keep-alive>
-  </div>
+  </v-app>
 </template>
 
 <script>
 export default {
-  name: "App"
+  name: "App",
 };
 </script>
 
