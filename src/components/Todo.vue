@@ -1,5 +1,5 @@
 <template>
-  <v-card min-width="400" class="my-3">
+  <v-card min-width="400" class="my-2">
     <v-row align="center">
       <v-col cols="2" xl="1" lg="1" md="1" sm="1" class="text-center pr-0">
         <v-btn @click="todo.done = !todo.done" icon color="success">
