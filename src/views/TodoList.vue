@@ -1,21 +1,18 @@
 <template>
-  <div>
-    <div id="config">
-      <input
-        class="config-check-box"
-        id="hide-done-todo"
-        type="checkbox"
+  <v-container fluid>
+    <v-row justify="end">
+      <v-switch
         v-model="hideDoneTodo"
-      />
-      <label for="hide-done-todo">完了したTodoを隠す</label>
-      <input
-        class="config-check-box"
-        id="show-relative-time"
-        type="checkbox"
+        label="完了したTodoを隠す"
+        class="mx-1"
+      ></v-switch>
+      <v-switch
         v-model="showRelative"
-      />
-      <label for="show-relative-time">相対時間表示</label>
-    </div>
+        label="相対時間表示"
+        class="mx-1"
+      ></v-switch>
+    </v-row>
+
     <br />
     <button class="button" @click="toCreateTodo">新規作成</button>
     <Todo
@@ -24,7 +21,7 @@
       :todo="todo"
       :show-relative="showRelative"
     ></Todo>
-  </div>
+  </v-container>
 </template>
 
 <script>
@@ -56,16 +53,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-#config {
-  text-align: right;
-}
-.config-check-box {
-  margin: 0 0 0 1rem;
-}
-.button {
-  width: 100%;
-  font-size: 1.2rem;
-}
-</style>
