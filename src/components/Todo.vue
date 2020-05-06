@@ -9,7 +9,9 @@
       <v-col>
         <v-card-title>{{ todo.title }}</v-card-title>
         <v-card-subtitle>{{ todo.dueDate | fromNow }}</v-card-subtitle>
-        <v-card-text>{{ todo.note }}</v-card-text>
+        <v-card-text>
+          <pre>{{ todo.note }}</pre>
+        </v-card-text>
       </v-col>
       <v-col cols="2" xl="1" lg="1" md="1" sm="1" class="text-center pl-0">
         <v-row class="flex-column fill-height" justify="center">
