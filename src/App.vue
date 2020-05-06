@@ -1,10 +1,11 @@
 <template>
-  <v-app id="app">
-    <p>Todoリストもどき</p>
-    <hr />
-    <keep-alive include="TodoList">
-      <router-view></router-view>
-    </keep-alive>
+  <v-app>
+    <v-app-bar app color="primary" dark>Todoリスト</v-app-bar>
+    <v-content>
+      <keep-alive include="TodoList">
+        <router-view></router-view>
+      </keep-alive>
+    </v-content>
   </v-app>
 </template>
 
@@ -13,14 +14,3 @@ export default {
   name: "App",
 };
 </script>
-
-<style scoped>
-#app {
-  width: 70%;
-  margin: auto;
-}
-#header {
-  width: 100%;
-  margin: auto;
-}
-</style>
