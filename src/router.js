@@ -1,8 +1,7 @@
 import Vue from "vue";
 import Router from "vue-router";
 import TodoList from "./views/TodoList";
-import CreateTodo from "./views/CreateTodo";
-import EditTodo from "./views/EditTodo";
+import RegisterTodo from "./views/RegisterTodo";
 
 Vue.use(Router);
 
@@ -10,11 +9,11 @@ export default new Router({
   mode: "history",
   routes: [
     { path: "/", component: TodoList },
-    { path: "/create", component: CreateTodo },
+    { path: "/create", component: RegisterTodo },
     {
       name: "edit",
       path: "/edit",
-      component: EditTodo,
+      component: RegisterTodo,
       props(route) {
         return {
           ...route.params,

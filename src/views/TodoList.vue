@@ -13,7 +13,7 @@
       ></v-switch>
     </v-row>
     <v-row>
-      <v-btn @click="toCreateTodo" color="success" class="font-weight-bold">
+      <v-btn @click="toRegisterTodo" color="success" class="font-weight-bold">
         <v-icon left>mdi-pencil-plus</v-icon> 新規作成
       </v-btn>
     </v-row>
@@ -51,7 +51,7 @@ export default {
     Todo,
   },
   methods: {
-    toCreateTodo() {
+    toRegisterTodo() {
       this.$router.push("/create");
     },
   },

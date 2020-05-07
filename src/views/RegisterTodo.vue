@@ -5,7 +5,7 @@
         <v-card-text>
           <v-text-field
             ref="title"
-            v-model="title"
+            v-model="tmpTodo.title"
             :rules="[]"
             label="タイトル"
             required
@@ -22,7 +22,7 @@
               >
                 <template v-slot:activator="{ on }">
                   <v-text-field
-                    v-model="dueDate"
+                    v-model="date"
                     label="締切日"
                     prepend-icon="mdi-calendar"
                     readonly
@@ -30,7 +30,7 @@
                   ></v-text-field>
                 </template>
                 <v-date-picker
-                  v-model="dueDate"
+                  v-model="date"
                   @input="showDatePicker = false"
                   locale="jp-ja"
                   :day-format="(date) => new Date(date).getDate()"
@@ -47,11 +47,11 @@
                 offset-y
                 min-width="290px"
                 persistent
-                :return-value.sync="dueTime"
+                :return-value.sync="time"
               >
                 <template v-slot:activator="{ on }">
                   <v-text-field
-                    v-model="dueTime"
+                    v-model="time"
                     prepend-icon="mdi-clock-outline"
                     readonly
                     v-on="on"
@@ -59,9 +59,9 @@
                 </template>
                 <v-time-picker
                   v-if="showTimePicker"
-                  v-model="dueTime"
+                  v-model="time"
                   format="24hr"
-                  @click:minute="$refs.timePicker.save(dueTime)"
+                  @click:minute="$refs.timePicker.save(time)"
                 ></v-time-picker>
               </v-menu>
             </v-col>
@@ -70,7 +70,7 @@
             clearable
             clear-icon="mdi-close-circle-outline"
             label="メモ"
-            v-model="note"
+            v-model="tmpTodo.note"
           ></v-textarea>
         </v-card-text>
         <v-divider class="mt-12"></v-divider>
@@ -79,7 +79,9 @@
             <v-icon left>mdi-less-than</v-icon> キャンセル
           </v-btn>
           <v-spacer></v-spacer>
-          <v-btn color="primary" @click="registerTodo">登録</v-btn>
+          <v-btn @click="registerTodo" :color="registerButtonColor">{{
+            registerButtonName
+          }}</v-btn>
         </v-card-actions>
       </v-card>
     </v-col>
@@ -87,38 +89,59 @@
 </template>
 <script>
 export default {
+  props: ["todo"],
   data() {
     return {
-      title: "",
-      dueDate: "",
-      dueTime: "00:00",
-      note: "",
-      done: false,
+      newTodo: true,
+      tmpTodo: {
+        title: "",
+        dueDate: "",
+        note: "",
+        done: false,
+      },
+      date: "",
+      time: "00:00",
       showDatePicker: false,
       showTimePicker: false,
     };
+  },
+  computed: {
+    registerButtonColor() {
+      return this.newTodo ? "success" : "primary";
+    },
+    registerButtonName() {
+      return this.newTodo ? "登録" : "更新";
+    },
   },
   methods: {
     toTodoList() {
       this.$router.push("/");
     },
     registerTodo() {
-      const todo = {
-        title: this.title,
-        dueDate: this.dueDate,
-        note: this.note,
-        done: false,
-      };
-      this.$root.addTodo(todo);
+      this.tmpTodo.dueDate = this.dateTime();
+      if (this.newTodo) {
+        this.$root.addTodo(this.tmpTodo);
+      } else {
+        this.$root.updateTodo(this.tmpTodo);
+      }
       this.toTodoList();
+    },
+    dateTime() {
+      return this.$root
+        .$dayjs(`${this.date} ${this.time}`)
+        .format("YYYY-MM-DD HH:mm");
     },
   },
   mounted() {
-    this.dueDate = this.$root
+    if (this.todo) {
+      this.tmpTodo = Object.assign(this.tmpTodo, this.todo);
+      this.newTodo = false;
+    }
+    this.date = this.$root
       .$dayjs()
       .toISOString()
       .substr(0, 10);
-    this.dueTime = this.$root.$dayjs().format("HH:mm");
+    this.time = this.$root.$dayjs().format("HH:mm");
   },
 };
 </script>
