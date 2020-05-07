@@ -1,29 +1,11 @@
 import Vue from "vue";
+import { v4 as uuidv4 } from "uuid";
 import App from "./App.vue";
 import router from "./router";
-
-import "dayjs/locale/ja";
-import dayjs from "dayjs";
-import relativeTime from "dayjs/plugin/relativeTime";
-import localizedFormat from "dayjs/plugin/localizedFormat";
-
-import { v4 as uuidv4 } from "uuid";
-
-import localStorage from "vue-ls";
+import dayjs from "./libs/day";
 import vuetify from "./plugins/vuetify";
-const options = {
-  namespace: "vue_todo_ls_", // key prefix
-  name: "ls", // name variable Vue.[ls] or this.[$ls],
-  storage: "local", // storage name session, local, memory
-};
+import "./libs/localstorage";
 
-Vue.use(localStorage, options);
-
-dayjs.extend(relativeTime);
-dayjs.extend(localizedFormat);
-dayjs.locale("ja");
-
-Vue.prototype.$dayjs = dayjs;
 Vue.config.productionTip = false;
 
 Vue.filter("fromNow", (date) => dayjs().to(date));
