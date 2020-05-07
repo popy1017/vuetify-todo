@@ -10,30 +10,62 @@
             label="タイトル"
             required
           ></v-text-field>
-          <v-menu
-            v-model="showDatePicker"
-            :close-on-content-click="false"
-            :nudge-right="40"
-            transition="scale-transition"
-            offset-y
-            min-width="290px"
-          >
-            <template v-slot:activator="{ on }">
-              <v-text-field
-                v-model="dueDate"
-                label="締切日"
-                prepend-icon="mdi-calendar"
-                readonly
-                v-on="on"
-              ></v-text-field>
-            </template>
-            <v-date-picker
-              v-model="dueDate"
-              @input="showDatePicker = false"
-              locale="jp-ja"
-              :day-format="(date) => new Date(date).getDate()"
-            ></v-date-picker>
-          </v-menu>
+          <v-row>
+            <v-col>
+              <v-menu
+                v-model="showDatePicker"
+                :close-on-content-click="false"
+                :nudge-right="40"
+                transition="scale-transition"
+                offset-y
+                min-width="290px"
+              >
+                <template v-slot:activator="{ on }">
+                  <v-text-field
+                    v-model="dueDate"
+                    label="締切日"
+                    prepend-icon="mdi-calendar"
+                    readonly
+                    v-on="on"
+                  ></v-text-field>
+                </template>
+                <v-date-picker
+                  v-model="dueDate"
+                  @input="showDatePicker = false"
+                  locale="jp-ja"
+                  :day-format="(date) => new Date(date).getDate()"
+                ></v-date-picker>
+              </v-menu>
+            </v-col>
+            <v-col>
+              <v-menu
+                ref="timePicker"
+                v-model="showTimePicker"
+                :close-on-content-click="false"
+                :nudge-right="40"
+                transition="scale-transition"
+                offset-y
+                min-width="290px"
+                persistent
+                :return-value.sync="dueTime"
+              >
+                <template v-slot:activator="{ on }">
+                  <v-text-field
+                    v-model="dueTime"
+                    prepend-icon="mdi-clock-outline"
+                    readonly
+                    v-on="on"
+                  ></v-text-field>
+                </template>
+                <v-time-picker
+                  v-if="showTimePicker"
+                  v-model="dueTime"
+                  format="24hr"
+                  @click:minute="$refs.timePicker.save(dueTime)"
+                ></v-time-picker>
+              </v-menu>
+            </v-col>
+          </v-row>
           <v-textarea
             clearable
             clear-icon="mdi-close-circle-outline"
@@ -58,10 +90,12 @@ export default {
   data() {
     return {
       title: "",
-      dueDate: new Date().toISOString().substr(0, 10),
+      dueDate: "",
+      dueTime: "00:00",
       note: "",
       done: false,
       showDatePicker: false,
+      showTimePicker: false,
     };
   },
   methods: {
@@ -78,6 +112,13 @@ export default {
       this.$root.addTodo(todo);
       this.toTodoList();
     },
+  },
+  mounted() {
+    this.dueDate = this.$root
+      .$dayjs()
+      .toISOString()
+      .substr(0, 10);
+    this.dueTime = this.$root.$dayjs().format("HH:mm");
   },
 };
 </script>
