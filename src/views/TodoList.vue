@@ -26,12 +26,15 @@
       ></v-select>
     </v-row>
     <v-row class="flex-column" justify="center">
-      <Todo
-        v-for="todo in sortedTodos"
-        :key="todo.id"
-        :todo="todo"
-        :show-relative="showRelative"
-      ></Todo>
+      <v-fade-transition group leave-absolute hide-on-leave>
+        <Todo
+          transition="fade-transition"
+          v-for="todo in sortedTodos"
+          :key="todo.id"
+          :todo="todo"
+          :show-relative="showRelative"
+        ></Todo>
+      </v-fade-transition>
     </v-row>
   </v-container>
 </template>
