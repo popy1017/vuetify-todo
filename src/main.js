@@ -2,14 +2,11 @@ import Vue from "vue";
 import { v4 as uuidv4 } from "uuid";
 import App from "./App.vue";
 import router from "./router";
-import dayjs from "./libs/day";
 import vuetify from "./plugins/vuetify";
+import "./libs/day";
 import "./libs/localstorage";
 
 Vue.config.productionTip = false;
-
-Vue.filter("fromNow", (date) => dayjs().to(date));
-Vue.filter("llll", (date) => dayjs(date).format("llll"));
 
 new Vue({
   render: (h) => h(App),

@@ -8,7 +8,7 @@
       </v-col>
       <v-col>
         <v-card-title>{{ todo.title }}</v-card-title>
-        <v-card-subtitle>{{ todo.dueDate | fromNow }}</v-card-subtitle>
+        <v-card-subtitle>{{ dueDate }}</v-card-subtitle>
         <v-card-text>
           <pre>{{ todo.note }}</pre>
         </v-card-text>
@@ -39,6 +39,11 @@ export default {
       return this.todo.done
         ? "mdi-checkbox-marked-circle-outline"
         : "mdi-checkbox-blank-circle-outline";
+    },
+    dueDate() {
+      return this.showRelative
+        ? this.$root.$dayjs().to(this.todo.dueDate)
+        : this.$root.$dayjs(this.todo.dueDate).format("llll");
     },
   },
   methods: {
