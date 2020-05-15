@@ -1,5 +1,5 @@
 <template>
-  <div id="id">
+  <div id="app">
     <v-app>
       <v-app-bar app color="primary" dark class="headline"
         >Todoリスト</v-app-bar
