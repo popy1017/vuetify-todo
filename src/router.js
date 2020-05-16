@@ -6,7 +6,6 @@ import RegisterTodo from "./views/RegisterTodo";
 Vue.use(Router);
 
 export default new Router({
-  mode: "history",
   routes: [
     { path: "/", component: TodoList },
     { path: "/create", component: RegisterTodo },
